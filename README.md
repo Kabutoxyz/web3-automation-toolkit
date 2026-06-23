@@ -147,4 +147,4 @@ Tests hit real public RPCs and verify actual on-chain responses. They will pass 
 MIT
 
 
-<!-- Last updated: 2026-06-13 -->
+<!-- Last updated: 2026-06-23 -->

@@ -238,3 +238,19 @@ if __name__ == "__main__":
         ch = [c.strip() for c in sys.argv[2].split(",")]
     rpt = build_portfolio(addr, ch)
     print(format_portfolio(rpt))
+
+
+    def aggregate_balances(self, chains=None):
+        """Aggregate balances across multiple chains."""
+        chains = chains or self.supported_chains
+        results = {}
+        for chain in chains:
+            try:
+                balance = self.get_native_balance(chain)
+                results[chain] = {'native': balance, 'tokens': []}
+                tokens = self.get_token_balances(chain)
+                results[chain]['tokens'] = tokens
+            except Exception as e:
+                logger.warning(f"Failed to fetch {chain}: {e}")
+                results[chain] = {'native': 0, 'tokens': [], 'error': str(e)}
+        return results
